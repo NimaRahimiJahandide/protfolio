@@ -6,15 +6,17 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-  type ToastProps,
   type ToastActionElement,
 } from "../../components/ui/toast";
 
-export interface ToastData extends ToastProps {
+export interface ToastData {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
   action?: ToastActionElement;
+  variant?: "default" | "destructive";
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function Toaster() {
@@ -22,9 +24,9 @@ export function Toaster() {
 
   return (
     <ToastProvider>
-      {toasts.map(function ({ id, title, description, action, ...props }: ToastData) {
+      {toasts.map(function ({ id, title, description, action, variant, ...props }: any) {
         return (
-          <Toast key={id} {...props}>
+          <Toast key={id} variant={variant} {...props}>
             <div className="grid gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
