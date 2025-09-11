@@ -1,5 +1,4 @@
 import {
-  Instagram,
   Linkedin,
   Mail,
   MapPin,
@@ -20,7 +19,7 @@ export const ContactSection = () => {
     message: ''
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -28,13 +27,13 @@ export const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
       // EmailJS configuration
-      const result = await emailjs.send(
+      await emailjs.send(
         'service_o41glik',
         'template_90s7m4u',
         {
